@@ -22,7 +22,6 @@ public class Ejercicio10Ruleta {
 		double cantidadApostar = 0;
 		// variables to play
 		int numeroApostar;
-		int bloqueApostar;
 		int numeroAleatorio;
 		int opcionMenuPrincipal;
 		int opcionMenuRuleta;
