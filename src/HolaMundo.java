@@ -5,6 +5,8 @@ public class HolaMundo {
 		
 		int num = 24;
 		
-		System.out.println("The number is: "+(num + 2));
+		System.out.println("1 - The number is: "+(num + 2));
+		System.out.println("2 -The number is: "+(num + 3));
+		
 	}
 }
