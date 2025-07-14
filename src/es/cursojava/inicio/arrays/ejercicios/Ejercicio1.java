@@ -29,5 +29,17 @@ public class Ejercicio1 {
 		System.out.println("El numero de alumnos que han aprobado es: " + numeroAprobados + "\n"
 				+ "La media de todos los alumnos es: " + media);
 	}
+//		int [][] matrix = {
+//				            {1,2,3},
+//				            {4,5,6}
+//				          };
+//		for (int i = 0; i < matrix.length; i++) {//para recorrer las filas
+//			//System.out.println("estamos en la fila: "+i);
+//			for (int j = 0; j < matrix[i].length; j++) {//para recorrer las columnas
+//				//System.out.println("estamos en la columna: "+j);
+//				System.out.print(matrix[i][j]+" ");
+//			}
+//			System.out.println();
+//		}
 
 }
