@@ -56,7 +56,7 @@ public class Ejercicio3 {
 				alumnoABuscar = scanner.nextLine();
 				for (int i = 0; i < aula.length; i++) {
 					for (int j = 0; j < aula[i].length; j++) {
-						if(aula[i][j].equalsIgnoreCase(alumnoABuscar)) {
+						if(alumnoABuscar.equalsIgnoreCase(aula[i][j])) {
 							System.out.println("El alumno "+alumnoABuscar+" se encuentra en el aula "+(i+1)+" silla "+(j+1));
 							alumnoFueEncontrado = true;
 							break;
@@ -77,7 +77,7 @@ public class Ejercicio3 {
 				alumnoABuscar = scanner.nextLine();
 				for (int i = 0; i < aula.length; i++) {
 					for (int j = 0; j < aula[i].length; j++) {
-						if(aula[i][j].equalsIgnoreCase(alumnoABuscar)) {
+						if(alumnoABuscar.equalsIgnoreCase(aula[i][j])) {
 							System.out.println("El alumno "+alumnoABuscar+" fue borrado del aula "+(i+1)+" silla "+(j+1));
 							aula[i][j] = null;
 							alumnoFueEncontrado = true;
