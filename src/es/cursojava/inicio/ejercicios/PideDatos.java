@@ -29,6 +29,7 @@ public class PideDatos {
 		scanner = new Scanner(System.in);
 		population = scanner.nextLine();
 		
+		scanner.close();
 		System.out.println("Los datos ingresados son: [ calle: "+streetName+" , numero: "+number+" , poblacion: "+population+" ]");
 		
 		isStreetBig = number > 100;
