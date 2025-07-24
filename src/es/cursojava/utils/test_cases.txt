@@ -1,0 +1,9 @@
+test cases for Ejercicio5_metodos -> email validation
+
+ wrong:
+ 		- user @gmail.com -> El email no es valido porque hay espacios en blanco!
+ 	 	- user@user.@bmail.com.es.s -> El email no es valido porque tiene mas de un @
+ 	 	- user@gmailcom -> El email no es valido porque no hay al menos un punto despues del @
+ 	 	- user@.kmai.com.es -> El email no es valido porque entre el @ y el . a su derecha debe haber almenos 2 caracteres de separacion
+ 	 	- user@gmail.c -> El email no es valido porque luego del ultimo . debe hacer entre 2 y 6 caracteres
+ 	 	- user@gmail.compilador -> El email no es valido porque luego del ultimo . debe hacer entre 2 y 6 caracteres

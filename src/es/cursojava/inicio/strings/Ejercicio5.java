@@ -21,8 +21,8 @@ public class Ejercicio5 {
 				System.out.println("No ha ingresado nada, por favor ingrese un correo");
 			else if(email.indexOf('@') == email.lastIndexOf('@')) {
 				if(email.indexOf('@') < email.lastIndexOf('.')) {
-					if(email.indexOf('@') - email.indexOf('.', email.indexOf('@')) >= 2) {
-						if(email.lastIndexOf('.') - email.length() >= 2 && email.lastIndexOf('.') - email.length() <= 6)
+					if(email.indexOf('.', email.indexOf('@')) - email.indexOf('@') >= 2){
+						if(email.length() - email.lastIndexOf('.') - 1 >= 2 && email.length() - email.lastIndexOf('.') - 1 <= 6)
 							System.out.println("El email es valido!");
 						else
 							System.out.println("El email no es valido porque luego del ultimo . debe hacer entre 2 y 6 caracteres");
