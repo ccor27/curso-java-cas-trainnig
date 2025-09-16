@@ -1,0 +1,6 @@
+17:08:20.950 [main] INFO  HolaMundo - test
+17:08:51.348 [main] INFO  HolaMundo - test curso java
+17:12:08.590 [main] WARN  HolaMundo - test curso java
+17:15:57.636 [main] ERROR HolaMundo - test curso error
+17:15:57.638 [main] WARN  HolaMundo - test curso warn
+17:15:57.638 [main] INFO  HolaMundo - test curso info
