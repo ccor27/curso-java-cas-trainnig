@@ -11,7 +11,7 @@ public class BandaMusica {
 	public void empezarConcierto() {
 
 		Guitarra guitarra = new Guitarra("Guitarra clasica", "cuerda pulsada", 5);
-		GuitarraElectrica guitarraElectrica = new GuitarraElectrica("Guitarra electrica fender", "cuerda pulsada", 4);
+		GuitarraElectrica guitarraElectrica = new GuitarraElectrica("Guitarra electrica fender", "cuerda pulsada", 4,120);
 		Piano piano = new Piano("Piano", "cuerda percutida", 7, "vertical o de pared");
 		Tambor tambor = new Tambor("Tambor", "percusion", "madera y piel animal");
 

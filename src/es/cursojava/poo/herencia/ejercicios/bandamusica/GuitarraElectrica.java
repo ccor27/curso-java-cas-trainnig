@@ -1,11 +1,12 @@
 package es.cursojava.poo.herencia.ejercicios.bandamusica;
 
-public class GuitarraElectrica extends Instrumento{
+public class GuitarraElectrica extends Guitarra{
 
 	private int potencia;
 
-	public GuitarraElectrica(String nombre, String tipo, int potencia) {
-		super(nombre, tipo);
+
+	public GuitarraElectrica(String nombre, String tipo, int numCuerdas, int potencia) {
+		super(nombre, tipo, numCuerdas);
 		this.potencia = potencia;
 	}
 
