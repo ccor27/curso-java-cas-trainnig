@@ -7,14 +7,13 @@ public class Instrumento {
 	private boolean afinado;
 	
 	
-	public Instrumento(String nombre, String tipo, boolean afinado) {
+	public Instrumento(String nombre, String tipo) {
 		super();
 		this.nombre = nombre;
 		this.tipo = tipo;
-		this.afinado = afinado;
 	}
 	public void afinar() {
-		if(Math.random()*10 > 4) {
+		if(Math.random() > 0.4) {
 			this.afinado = true;
 		}else {
 			this.afinado = false;

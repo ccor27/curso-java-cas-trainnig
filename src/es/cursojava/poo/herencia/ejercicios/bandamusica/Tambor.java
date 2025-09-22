@@ -4,8 +4,8 @@ public class Tambor extends Instrumento{
 	
 	private String material;
 
-	public Tambor(String nombre, String tipo, boolean afinado, String material) {
-		super(nombre, tipo, afinado);
+	public Tambor(String nombre, String tipo, String material) {
+		super(nombre, tipo);
 		this.material = material;
 	}
 	

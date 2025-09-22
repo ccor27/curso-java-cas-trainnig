@@ -4,8 +4,8 @@ public class Guitarra extends Instrumento{
 	
 	private int numCuerdas;
 
-	public Guitarra(String nombre, String tipo, boolean afinado, int numCuerdas) {
-		super(nombre, tipo, afinado);
+	public Guitarra(String nombre, String tipo, int numCuerdas) {
+		super(nombre, tipo);
 		this.numCuerdas = numCuerdas;
 	}
 

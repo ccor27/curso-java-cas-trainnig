@@ -5,8 +5,8 @@ public class Piano extends Instrumento {
 	private int numeroOctavas;
 	private String tipoPiano;
 
-	public Piano(String nombre, String tipo, boolean afinado, int numeroOctavas, String tipoPiano) {
-		super(nombre, tipo, afinado);
+	public Piano(String nombre, String tipo, int numeroOctavas, String tipoPiano) {
+		super(nombre, tipo);
 		this.numeroOctavas = numeroOctavas;
 		this.tipoPiano = tipoPiano;
 	}
