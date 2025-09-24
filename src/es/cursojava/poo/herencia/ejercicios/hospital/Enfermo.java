@@ -22,5 +22,4 @@ public class Enfermo extends Persona {
 		System.out.println("Enfermo "+this.getNombre()+" comiendo en la habitacion");
 	}
 	
-	
 }

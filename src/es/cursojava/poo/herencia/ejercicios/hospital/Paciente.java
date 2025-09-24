@@ -17,10 +17,10 @@ public class Paciente extends Persona {
 		this.sintomas = sintomas;
 	}
 	
+	
+	
 	@Override
 	public void comer() {
-	//usamos el this, porque la clase persona (padre) tiene el nombre y como es de tipo privadp
-	//debemos usar su metodo getNombre que es publico y nos da el nombre
 	System.out.println("Paciente "+this.getNombre()+" comiendo en la cafeteria");	
 	}
 	
