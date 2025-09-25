@@ -1,6 +1,6 @@
 package es.cursojava.poo.herencia.ejercicios.hospital;
 
-public class Persona {
+public abstract class Persona {
 	
 	private String nombre;
 	private int edad;
@@ -27,7 +27,7 @@ public class Persona {
 		this.edad = edad;
 	}
 	
-	public void comer() {}
+	public abstract void comer();
 	
 
 }

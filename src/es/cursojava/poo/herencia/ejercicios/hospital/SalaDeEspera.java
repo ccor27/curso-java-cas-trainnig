@@ -26,6 +26,11 @@ public class SalaDeEspera {
     public Paciente sacarPaciente() {
         return pacientes.poll(); 
     }
+
+	public Queue<Paciente> getPacientes() {
+		return pacientes;
+	}
+    
 //	private Paciente[] pacientes;
 //	
 //	public SalaDeEspera() {

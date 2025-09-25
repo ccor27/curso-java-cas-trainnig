@@ -9,6 +9,9 @@ public class Main {
 		doctor.diagnosticarPaciente(pacienteRaro);
 		doctor.diagnosticarPaciente(pacienteGripe);
 
+//		Hospital hospital = new Hospital();
+//		hospital.abrirHospital();
+//		hospital.comer();
 	}
 
 }

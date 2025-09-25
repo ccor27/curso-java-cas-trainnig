@@ -1,0 +1,121 @@
+📁 ESTRUCTURA DEL SISTEMA HOSPITALARIO
+🧑‍💼 Módulo: Gestión de Empleados
+
+Acciones:
+
+Crear nuevo empleado (nombre, rol, especialidad, turno, piso asignado)
+
+Editar datos del empleado
+
+Eliminar empleado
+
+Asignar turnos
+
+Registrar asistencia (fichar entrada/salida)
+
+Registrar pausas (descanso / comida)
+
+Roles con acceso:
+
+Administrador
+
+🧑‍⚕️ Módulo: Gestión de Pacientes
+
+Acciones:
+
+Registrar nuevo paciente
+
+Editar información del paciente
+
+Consultar estado actual (esperando, en consulta, hospitalizado)
+
+Ver historial médico
+
+Roles con acceso:
+
+Recepción (registro)
+
+Doctor (consulta y edición de historial)
+
+Enfermero (estado actual, ubicación)
+
+📆 Módulo: Gestión de Citas
+
+Acciones:
+
+Crear nueva cita
+
+Asignar paciente a doctor
+
+Ver disponibilidad del doctor
+
+Reprogramar / cancelar cita
+
+Ver citas por fecha o por paciente
+
+Roles con acceso:
+
+Recepción (creación y edición)
+
+Doctor (visualizar citas propias)
+
+Paciente (opcional, ver sus citas)
+
+📄 Módulo: Historial Médico
+
+Acciones:
+
+Ver historial por paciente
+
+Añadir entrada al historial (por cada cita)
+
+Adjuntar diagnóstico, tratamiento, recetas
+
+Roles con acceso:
+
+Doctor (crear y ver)
+
+Enfermero (opcional: ver notas básicas)
+
+🔐 ROLES Y PERMISOS
+👤 Administrador
+
+Gestiona empleados
+
+Asigna turnos
+
+Crea usuarios
+
+Accede a reportes generales
+
+👨‍⚕️ Doctor
+
+Ve sus citas
+
+Atiende pacientes
+
+Accede y actualiza historial médico
+
+🧑‍🔬 Enfermero
+
+Registra llegada de pacientes
+
+Acompaña a pacientes
+
+Consulta estado del paciente
+
+Realiza tareas de asistencia
+
+🧑‍💻 Recepción
+
+Registra nuevos pacientes
+
+Asigna citas
+
+Informa disponibilidad
+
+👥 Paciente (opcional)
+
+Ve sus citas futuras/pasadas
+
+Ve historial personal (solo lectura)
