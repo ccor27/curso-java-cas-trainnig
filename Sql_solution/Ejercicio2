@@ -1,10 +1,31 @@
-CREATE TABLE productos(
-id NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY, --id: Entero, clave primaria y autoincrementable.
-nombre VARCHAR(100) NOT NULL, -- nombre: Cadena de caracteres (VARCHAR(100)), no nulo.
-descripcion CLOB, --  descripcion: Texto (TEXT), puede ser nulo.
-precio NUMBER(8,2) NOT NULL CHECK (precio >= 0), --    precio: Número decimal (DECIMAL(8,2)), no nulo y debe ser mayor o igual a 0.
-stock NUMBER NOT NULL DEFAULT (0), --stock: Entero, no nulo y con valor por defecto 0.
-fecha_registro DATETIME DEFAULT SYSDATE, --fecha_registro: Fecha y hora (DATETIME), con valor por defecto la fecha y hora actual
-descuento NUMBER CHECK(descuento >= 0 AND descuento <= 100),  --descuento: Número entero, que representa el porcentaje de descuento (entre 0 y 100).
-estado VARCHAR(80) DEFAULT 'activo' CHECK(estado IN ('activo','inactivo')) --estado: Cadena de caracteres (ENUM) que solo puede tener los valores 'activo' o 'inactivo', con valor por defecto 'activo'.
+create table tb_productos(
+id number generated always as identity,  --id: Entero y autoincrementable.
+nombre varchar(100) not null, -- nombre: Cadena de caracteres (VARCHAR(100)), no nulo.
+descripcion clob,  --  descripcion: Texto (TEXT), puede ser nulo. (usamos clob porque text no existe en oracle-xe)
+precio number(8,2) not null check(precio >= 0),  -- precio: Número decimal (DECIMAL(8,2)), no nulo y debe ser mayor o igual a 0.
+stock number(3) default (0) not null, --stock: Entero, no nulo y con valor por defecto 0.
+fecha_registro date default sysdate,--fecha_registro: Fecha y hora (DATETIME), con valor por defecto la fecha y hora actual
+descuento number(3) check(descuento >= 0 and descuento <= 100),  --descuento: Número entero, que representa el porcentaje de descuento (entre 0 y 100).
+estado varchar(50) default 'activo' check(estado in ('activo','inactivo')), --estado: Cadena de caracteres (ENUM) que solo puede tener los valores 'activo' o 'inactivo', con valor por defecto 'activo'.
+primary key (id) --clave primaria , se indica aqui porque oracle-xe no permite o se confunde al tener el generated always as identity junto el primary key
 );
+
+A)
+alter table tb_productos add categoria varchar(50) not null; --Agregar la columna categoria: Tipo VARCHAR(50), no nulo
+alter table tb_productos add proveedor varchar(100); --Agregar la columna proveedor: Tipo VARCHAR(100), que permita nulos.
+
+B)
+para cambiar de un tipo clob a un tipo varchar, se debe hacer algo diferente ya que los clob y lobs se almacenan de manera diferente fuerea de la tabal
+por ello lo que debemos hacer es, crear una columna temporal de tipo varchar2(500), luego almacenar esos datos de la columna de tipo clob, pero claro
+si clob es mucho mayor que varchar nos daria error, asi que lo que hariamos es un truncamiento, es decir, almacenar hasta los primero 500 caracteres del clob en varchar
+usando 'DBMS_LOB.SUBSTR(descripcion, 500, 1);', luego eliminamos la columna de tipo clob y renombramos la temporal y listo.
+
+
+alter table tb_productos add descripcion_tmp varchar2(500);
+update tb_productos set descripcion_tmp = DBMS_LOB.SUBSTR(descripcion, 250, 1);
+
+alter table tb_productos drop column descripcion;
+alter table tb_productos rename column descripcion_tmp to descripcion;
+
+
+SIN HACER EL TEST
