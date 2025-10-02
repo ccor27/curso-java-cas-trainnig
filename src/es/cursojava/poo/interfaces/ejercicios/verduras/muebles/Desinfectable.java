@@ -1,4 +1,4 @@
-package es.cursojava.poo.interfaces;
+package es.cursojava.poo.interfaces.ejercicios.verduras.muebles;
 
 public interface Desinfectable extends Limpiable{
 

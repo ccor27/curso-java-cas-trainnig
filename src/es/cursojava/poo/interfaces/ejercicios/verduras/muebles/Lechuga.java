@@ -1,4 +1,4 @@
-package es.cursojava.poo.interfaces;
+package es.cursojava.poo.interfaces.ejercicios.verduras.muebles;
 
 public class Lechuga extends Verdura implements Desinfectable{
 
