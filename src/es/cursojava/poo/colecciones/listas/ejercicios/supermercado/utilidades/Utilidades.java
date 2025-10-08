@@ -50,7 +50,19 @@ public class Utilidades {
 		return seleccion;
 	}
 	public static String menuSeleccionProducto(String[] opciones, String nombreCliete, String title) {
+		boolean menuFlag = true;
 		String producto = "";
+		while(menuFlag) {
+			Utilidades.pintaMenu(opciones, nombreCliete+", por favor seleccione el producto comprar:", title);
+			int opcion = pideDatoNumerico("");
+		    if (opcion >= 1 && opcion <= opciones.length) {
+		    	producto = opciones[opcion - 1];
+	            menuFlag = false;
+	        } else {
+	            System.out.println("Opción inválida. Por favor, ingrese un número entre 1 y " + opciones.length);
+	        }
+			
+		}
 		return producto;
 	}
 }

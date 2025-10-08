@@ -63,7 +63,8 @@ public class Supermercado {
 				tipoAlimentos.toArray(new String[tipoAlimentos.size()]), cliente.getNombre(), nombre);
 		switch (categoriaSeleccionada) {
 		case "Verdura": {
-			
+			List<String> verduras = obtenerVerduras();
+			System.out.println(Utilidades.menuSeleccionProducto(verduras.toArray(new String[verduras.size()]), cliente.getNombre(), nombre));
 			break;
 		}
 		case "Lacteo": {
@@ -81,9 +82,6 @@ public class Supermercado {
 	}
 	
 
-	private void compraClienteSeleccionProducto(ClienteSupermercado cliente, String title) {
-		
-	}
 	private List<Carne> obtenerCarnes() {
 		List<Carne> carnes = new ArrayList<Carne>();
 		for (Set<Alimento> grupo : alimentos) {
@@ -108,12 +106,13 @@ public class Supermercado {
 		return lacteos;
 	}
 
-	private List<Verdura> obtenerVerduras() {
-		List<Verdura> verduras = new ArrayList<Verdura>();
+	private List<String> obtenerVerduras() {
+		List<String> verduras = new ArrayList<String>();
 		for (Set<Alimento> grupo : alimentos) {
 			for (Alimento alimento : grupo) {
 				if (alimento instanceof Verdura) {
-					verduras.add((Verdura) alimento);
+					Verdura v = (Verdura) alimento;
+					verduras.add(v.getNombre() +" -- "+ "cantidad: "+v.getCantidad() + " -- "+"precio por unidad: "+v.getPrecioPorUnidad());
 				}
 			}
 		}
