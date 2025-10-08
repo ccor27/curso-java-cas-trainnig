@@ -1,7 +1,10 @@
 package es.cursojava.poo.colecciones.listas;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import es.cursojava.poo.Persona;
 
@@ -23,6 +26,11 @@ public class EjemploLista {
 				Persona p = (Persona) object;
 			}
 		}
+		Set<Persona> conjunto = new HashSet<Persona>();
+		for(int i = 0; i < 10; i++) {
+			conjunto.add(new Persona());
+		}
+		Iterator ite = conjunto.iterator();
 	}
 
 }
