@@ -18,6 +18,7 @@ import es.cursojava.poo.colecciones.listas.ejercicios.supermercado.modelo.alimen
 import es.cursojava.poo.colecciones.listas.ejercicios.supermercado.modelo.alimentos.Verdura;
 import es.cursojava.poo.colecciones.listas.ejercicios.supermercado.modelo.alimentos.Yogurt;
 import es.cursojava.poo.colecciones.listas.ejercicios.supermercado.utilidades.Utilidades;
+import es.cursojava.poo.interfaces.ejercicios.verduras.muebles.Lechuga;
 
 public class Supermercado {
 
@@ -47,7 +48,8 @@ public class Supermercado {
 	}
 
 	private void iniciarClientes() {
-		clientes = Arrays.asList(new ClienteSupermercado("juan", 30), new ClienteSupermercado("Pedro", 25));
+		//new ClienteSupermercado("Pedro", 25)
+		clientes = Arrays.asList(new ClienteSupermercado("juan", 30));
 	}
 
 	private void permitirComprarUsuarios() {
@@ -61,18 +63,21 @@ public class Supermercado {
 		List<String> tipoAlimentos = obtenerTipoAlimentos();
 		String categoriaSeleccionada = Utilidades.menuSeleccionCategoriaCliente(
 				tipoAlimentos.toArray(new String[tipoAlimentos.size()]), cliente.getNombre(), nombre);
+		List<String> productos = new ArrayList<String>();
 		switch (categoriaSeleccionada) {
 		case "Verdura": {
-			List<String> verduras = obtenerVerduras();
-			System.out.println(Utilidades.menuSeleccionProducto(verduras.toArray(new String[verduras.size()]), cliente.getNombre(), nombre));
+			productos = obtenerVerduras();
+			ejecutarCompraProducto(cliente, Utilidades.menuSeleccionProducto(productos.toArray(new String[productos.size()]), cliente.getNombre(), nombre));
 			break;
 		}
 		case "Lacteo": {
-
+			productos = obtenerLacteos();
+			ejecutarCompraProducto(cliente, Utilidades.menuSeleccionProducto(productos.toArray(new String[productos.size()]), cliente.getNombre(), nombre));
 			break;
 		}
 		case "Carne": {
-
+			productos = obtenerCarnes();
+			ejecutarCompraProducto(cliente, Utilidades.menuSeleccionProducto(productos.toArray(new String[productos.size()]), cliente.getNombre(), nombre));
 			break;
 		}
 		default:
@@ -82,24 +87,52 @@ public class Supermercado {
 	}
 	
 
-	private List<Carne> obtenerCarnes() {
-		List<Carne> carnes = new ArrayList<Carne>();
+	private void ejecutarCompraProducto(ClienteSupermercado cliente, String productoSeleccionado) {
+		String nombreProducto = productoSeleccionado.substring(0, productoSeleccionado.indexOf(" "));
+		Alimento alimento = null;
+		for (Set<Alimento> Listaalimentos : alimentos) {
+			for (Alimento a : Listaalimentos) {
+				if(a.getNombre().equalsIgnoreCase(nombreProducto)) {
+					alimento = a;
+					break;
+				}
+			}
+		}
+		if(alimento==null) {
+			System.out.println("ERROR: el alimento seleccionado no esta en stock.");
+			return;
+		}
+		int	cantidadAComprar = Utilidades.pideDatoNumerico("Ingrese la cantidad que desea comprar: ");
+		if(alimento.comprar(cantidadAComprar)) {
+			cliente.añadirAlimento(alimento);
+			//TODO: how do this?
+			System.out.println("Compra con exito!");
+		}else {
+			System.out.println("Cantidad no disponible");
+		}
+		
+	}
+	
+	private List<String> obtenerCarnes() {
+		List<String> carnes = new ArrayList<String>();
 		for (Set<Alimento> grupo : alimentos) {
 			for (Alimento alimento : grupo) {
 				if (alimento instanceof Carne) {
-					carnes.add((Carne) alimento);
+					Carne c = (Carne) alimento;
+					carnes.add(c.getNombre()+" -- cantidad: "+c.getCantidad()+" -- precio por kilo: "+c.getPrecioPorKg());
 				}
 			}
 		}
 		return carnes;
 	}
 
-	private List<Lacteo> obtenerLacteos() {
-		List<Lacteo> lacteos = new ArrayList<Lacteo>();
+	private List<String> obtenerLacteos() {
+		List<String> lacteos = new ArrayList<String>();
 		for (Set<Alimento> grupo : alimentos) {
 			for (Alimento alimento : grupo) {
 				if (alimento instanceof Lacteo) {
-					lacteos.add((Lacteo) alimento);
+					Lacteo l = (Lacteo) alimento;
+					lacteos.add(l.getNombre() +" -- cantidad: "+l.getCantidad()+" -- precio por minilitro: "+l.getPrecioPorMl());
 				}
 			}
 		}
