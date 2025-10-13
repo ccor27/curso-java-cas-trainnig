@@ -3,18 +3,21 @@ package es.cursojava.poo;
 public class Alumno {
 	
 	private String nombre;
+	private String apellido;
 	private String dni;
 	private double notaMedia;
 	private String[] asignaturas;
 	
 	
-	public Alumno(String nombre, String dni) {
+	public Alumno(String nombre, String apellido, String dni) {
 		this.nombre = nombre;
+		this.apellido = apellido;
 		this.dni = dni;
 	}
-	public Alumno(String nombre, String dni, double notaMedia, String[] asignaturas) {
+	public Alumno(String nombre,String apellido, String dni, double notaMedia, String[] asignaturas) {
 		super();
 		this.nombre = nombre;
+		this.apellido = apellido;
 		this.dni = dni;
 		this.notaMedia = notaMedia;
 		this.asignaturas = asignaturas;
@@ -69,7 +72,7 @@ public class Alumno {
 	
 	@Override
 	public String toString() {
-		return "nombre: " + nombre + ", dni: " + dni + ", nota media:" + notaMedia;
+		return "nombre: " + nombre+ ", apellido: " + apellido + ", nota media:" + notaMedia;
 	}
 	
 	
