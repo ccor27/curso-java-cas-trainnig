@@ -22,4 +22,10 @@ public class Tomate extends Verdura {
 		
 		return cantidad * getPrecioPorUnidad();
 	}
+
+	@Override
+	public Alimento clonarConCantidad(int cantidad) {
+		// TODO Auto-generated method stub
+		return new Tomate(this.getNombre(), cantidad, this.getPrecioPorUnidad(), this.getTipo(), this.getColor());
+	}
 }

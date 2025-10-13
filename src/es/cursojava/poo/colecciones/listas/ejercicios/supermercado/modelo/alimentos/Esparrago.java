@@ -22,5 +22,11 @@ public class Esparrago extends Verdura {
 		
 		return cantidad * getPrecioPorUnidad();
 	}
+
+	@Override
+	public Alimento clonarConCantidad(int cantidad) {
+		// TODO Auto-generated method stub
+		return new Esparrago(this.getNombre(), cantidad, this.getPrecioPorUnidad(), this.getTipo(), this.getFecha_cosecha());
+	}
 	
 }

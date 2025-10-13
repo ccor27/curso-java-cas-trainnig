@@ -33,5 +33,6 @@ public abstract class Alimento {
 		cantidad -= cantidadAComprar;
 		return true;
 	}
+	public abstract Alimento clonarConCantidad(int cantidad);
 
 }

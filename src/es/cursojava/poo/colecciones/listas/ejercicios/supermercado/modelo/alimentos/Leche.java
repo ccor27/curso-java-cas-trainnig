@@ -29,6 +29,12 @@ public class Leche extends Lacteo {
 	public double calcularPrecioTotal(double cantidad) {
 		return cantidad * getPrecioPorMl();
 	}
+
+	@Override
+	public Alimento clonarConCantidad(int cantidad) {
+		// TODO Auto-generated method stub
+		return new Leche(this.getNombre(), cantidad, this.getPrecioPorMl(), this.getCaducidad(), fechaOrdeno);
+	}
 	
 	
 }

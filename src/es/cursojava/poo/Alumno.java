@@ -67,5 +67,11 @@ public class Alumno {
 		this.asignaturas = asignaturas;
 	}
 	
+	@Override
+	public String toString() {
+		return "nombre: " + nombre + ", dni: " + dni + ", nota media:" + notaMedia;
+	}
+	
+	
 	
 }

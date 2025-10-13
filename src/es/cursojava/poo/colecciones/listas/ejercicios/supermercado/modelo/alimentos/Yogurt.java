@@ -39,5 +39,12 @@ public class Yogurt extends Lacteo {
 		// TODO Auto-generated method stub
 		return cantidad * getPrecioPorMl();
 	}
+
+
+	@Override
+	public Alimento clonarConCantidad(int cantidad) {
+		// TODO Auto-generated method stub
+		return new Yogurt(getNombre(), cantidad, this.getPrecioPorMl(), this.getCaducidad(), this.getFechaProduccion());
+	}
 	
 }

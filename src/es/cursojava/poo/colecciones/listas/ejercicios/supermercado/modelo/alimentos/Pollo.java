@@ -29,6 +29,11 @@ public class Pollo extends Carne {
 		// TODO Auto-generated method stub
 		return cantidad * (getPrecioPorKg() * getPeso());
 	}
+	@Override
+	public Alimento clonarConCantidad(int cantidad) {
+		// TODO Auto-generated method stub
+		return new Pollo(this.getNombre(), cantidad, this.getPrecioPorKg(), this.getOrigen(), this.getParte(), this.getPeso());
+	}
 	
 	
 }

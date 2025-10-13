@@ -26,5 +26,12 @@ public class Cerdo extends Carne {
 		// TODO Auto-generated method stub
 		return cantidad * (getPrecioPorKg() * getPeso());
 	}
+
+
+	@Override
+	public Alimento clonarConCantidad(int cantidad) {
+		// TODO Auto-generated method stub
+		return new Cerdo(this.getNombre(), cantidad, this.getPrecioPorKg(), this.getOrigen(), this.getPeso());
+	}
 	
 }

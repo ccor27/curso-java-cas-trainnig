@@ -35,7 +35,7 @@ public class Supermercado {
 
 	private void iniciarAlimentos() {
 		Set<Alimento> carnes = new HashSet<Alimento>(Set.of(new Pollo("Pollo", 30, 0.95, "Alemania", "Pechuga", 0.5),
-				new Cerdo("Lomo de cerdo", 15, 2.50, "España", 2)));
+				new Cerdo("Cerdo lomo", 15, 2.50, "España", 2)));
 		Set<Alimento> lacteos = new HashSet<Alimento>(
 				Set.of(new Leche("leche de cabra", 150, 0.75, LocalDate.of(2025, 01, 15), LocalDate.of(2026, 1, 15)),
 						new Yogurt("Yogurt casero", 50, 1.50, LocalDate.of(2025, 01, 15), LocalDate.of(2026, 1, 15))));
@@ -88,10 +88,11 @@ public class Supermercado {
 	
 
 	private void ejecutarCompraProducto(ClienteSupermercado cliente, String productoSeleccionado) {
-		String nombreProducto = productoSeleccionado.substring(0, productoSeleccionado.indexOf(" "));
+		String nombreProducto = productoSeleccionado.substring(0, productoSeleccionado.indexOf("-"));
 		Alimento alimento = null;
 		for (Set<Alimento> Listaalimentos : alimentos) {
 			for (Alimento a : Listaalimentos) {
+				System.out.println("alimento -> "+a.getNombre()+" alimento seleccionado ->"+nombreProducto);
 				if(a.getNombre().equalsIgnoreCase(nombreProducto)) {
 					alimento = a;
 					break;
@@ -104,8 +105,7 @@ public class Supermercado {
 		}
 		int	cantidadAComprar = Utilidades.pideDatoNumerico("Ingrese la cantidad que desea comprar: ");
 		if(alimento.comprar(cantidadAComprar)) {
-			cliente.añadirAlimento(alimento);
-			//TODO: how do this?
+			cliente.añadirAlimento(alimento.clonarConCantidad(cantidadAComprar));
 			System.out.println("Compra con exito!");
 		}else {
 			System.out.println("Cantidad no disponible");
