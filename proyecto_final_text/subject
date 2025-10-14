@@ -187,4 +187,175 @@ Luego para las apuestas, simplemente validas que el usuario esté registrado en 
 ¿Quieres que te ayude a definir mejor las clases con esta estructura o un ejemplo de código para esa parte?
 
 
+=================================================== RELACIONES ======================================================================================
+Awesome, you’ve got a pretty rich domain model here! Let’s break down your entities and how their relationships and directionality should look, so your API and data model are clean, navigable, and maintainable.
+
+---
+
+# Entities & Relationships Overview
+
+You described:
+
+* **Season**
+  has a list of **Divisions**
+
+* **Division**
+  has a list of **MatchDays** (jornadas)
+
+* **MatchDay**
+  has a list of **Matches**
+
+* **Match**
+  has:
+
+  * `homeTeam`
+  * `visitTeam`
+  * `winnerTeam` (result)
+
+* **Bet**
+  relates to a **Match**, a predicted **winnerTeam**, and the **UserSeasonDivision** (which links user+season+division)
+
+---
+
+# How to model relationships & directionality?
+
+---
+
+### 1. Season → Divisions
+
+* **OneToMany** from Season to Division
+* **Unidirectional** is usually fine here (Season knows Divisions), because:
+
+  * You mostly start from a Season and get Divisions.
+  * Rarely do you start from a Division and need the Season?
+  * But if you want to query “which season does this division belong to?” easily, make it bidirectional.
+
+```java
+// Season class
+@OneToMany(cascade = CascadeType.ALL)
+@JoinColumn(name = "season_id")
+private List<Division> divisions;
+
+// Division class (optional)
+@ManyToOne
+@JoinColumn(name = "season_id")
+private Season season;
+```
+
+---
+
+### 2. Division → MatchDays
+
+* **OneToMany** from Division to MatchDay
+* Same reasoning as above applies. Usually unidirectional from Division to MatchDay is fine.
+
+```java
+// Division class
+@OneToMany(cascade = CascadeType.ALL)
+@JoinColumn(name = "division_id")
+private List<MatchDay> matchDays;
+
+// MatchDay class (optional)
+@ManyToOne
+@JoinColumn(name = "division_id")
+private Division division;
+```
+
+---
+
+### 3. MatchDay → Matches
+
+* **OneToMany** from MatchDay to Match
+* Again, unidirectional from MatchDay to Matches works fine unless you want reverse navigation.
+
+```java
+// MatchDay class
+@OneToMany(cascade = CascadeType.ALL)
+@JoinColumn(name = "match_day_id")
+private List<Match> matches;
+
+// Match class (optional)
+@ManyToOne
+@JoinColumn(name = "match_day_id")
+private MatchDay matchDay;
+```
+
+---
+
+### 4. Match → Teams (home, visit, winner)
+
+* `homeTeam`, `visitTeam`, and `winnerTeam` are usually references to a **Team** entity (ManyToOne from Match to Team)
+
+```java
+@ManyToOne
+@JoinColumn(name = "home_team_id")
+private Team homeTeam;
+
+@ManyToOne
+@JoinColumn(name = "visit_team_id")
+private Team visitTeam;
+
+@ManyToOne
+@JoinColumn(name = "winner_team_id")
+private Team winnerTeam;
+```
+
+Direction here is typically **unidirectional** from Match → Team since Team is more like a static entity.
+
+---
+
+### 5. Bet → Match, winnerTeam, userSeasonDivision
+
+* **ManyToOne** from Bet to Match
+* **ManyToOne** from Bet to predicted winnerTeam
+* **ManyToOne** from Bet to UserSeasonDivision (to link bet to user in a season/division)
+
+```java
+@ManyToOne
+@JoinColumn(name = "match_id")
+private Match match;
+
+@ManyToOne
+@JoinColumn(name = "predicted_winner_team_id")
+private Team predictedWinnerTeam;
+
+@ManyToOne
+@JoinColumn(name = "user_season_division_id")
+private UserSeasonDivision userSeasonDivision;
+```
+
+You usually don’t need the reverse from Match or UserSeasonDivision back to Bet unless you want to fetch bets from those entities — in that case, add a **OneToMany** on those entities.
+
+---
+
+# Summary of Directionality Recommendations
+
+| Relationship               | Cardinality        | Directionality                 | Notes                                                         |
+| -------------------------- | ------------------ | ------------------------------ | ------------------------------------------------------------- |
+| Season → Divisions         | OneToMany          | Unidirectional / Bidirectional | Bidirectional if you want to navigate from Division to Season |
+| Division → MatchDays       | OneToMany          | Unidirectional                 | Usually unidirectional is enough                              |
+| MatchDay → Matches         | OneToMany          | Unidirectional                 | Same as above                                                 |
+| Match → Teams              | ManyToOne (3 refs) | Unidirectional                 | Match holds teams, no reverse needed                          |
+| Bet → Match                | ManyToOne          | Unidirectional                 | Bet knows Match                                               |
+| Bet → predicted WinnerTeam | ManyToOne          | Unidirectional                 | Bet holds predicted winner                                    |
+| Bet → UserSeasonDivision   | ManyToOne          | Unidirectional                 | Bet knows user-season-division                                |
+| UserSeasonDivision → Bets  | OneToMany          | Bidirectional recommended      | To fetch bets by user in season/division                      |
+
+---
+
+# Additional notes
+
+* For **bidirectional** relationships (like UserSeasonDivision → Bet), keep both sides updated carefully to avoid stale state.
+* Use **DTOs** or **projection** in your API layer to control what data you expose and avoid infinite recursion during serialization.
+* Always annotate with **`@JsonManagedReference`** and **`@JsonBackReference`** (if using Jackson in Java) or use equivalent mechanisms to handle bidirectional JSON serialization cleanly.
+
+---
+
+If you want, I can help draft a full example with entity classes or show how to design REST API endpoints based on this!
+
+---
+
+Does that cover what you’re looking for?
+
+
 
