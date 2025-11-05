@@ -1,0 +1,164 @@
+==========================================================================================================================
+======================================================= TSP ===============================================================
+===================================== Posible solucion usando backtraking y permutaciones=================================
+- no podemos usar boolean, asi que tendriamos que manejarlo con 1 - 0
+==========================================================================================================================
+#include <math.h>
+#include <stdbool.h>
+#include <float.h>
+
+float distance(float a[2], float b[2]);
+
+void solve(float (*array)[2], int size, bool *visited, int current, int count, float current_dist, float *best)
+{
+    if (count == size) {
+        float total = current_dist + distance(array[current], array[0]);
+        if (total < *best)
+            *best = total;
+        return;
+    }
+
+    for (int i = 0; i < size; i++) {
+        if (!visited[i]) {
+            visited[i] = true;
+            solve(array, size, visited, i, count + 1,
+                  current_dist + distance(array[current], array[i]), best);
+            visited[i] = false; // backtrack
+        }
+    }
+}
+
+float tsp(float (*array)[2], ssize_t size)
+{
+    bool visited[11] = {false};
+    float best_distance = INFINITY;
+
+    visited[0] = true;
+    solve(array, size, visited, 0, 1, 0.0f, &best_distance);
+
+    return best_distance;
+}
+
+==========================================================================================================================
+==============================================PERMUTATION==================================================================
+===================================== Posible solucion usando backtraking =================================
+- recorrer el string (donde se aplicara la recursividad)
+- hacer swap de caracteres
+- ordenar los caracteres primero para mostrar en orden alfabetico
+==========================================================================================================================
+#include <stdio.h>
+#include <string.h>
+
+// Función para intercambiar dos caracteres
+void swap(char *a, char *b)
+{
+    char temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+// Función recursiva para generar permutaciones
+void permute(char *str, int start, int end)
+{
+    if (start == end)
+    {
+        puts(str); // imprime una permutación completa
+        return;
+    }
+
+    for (int i = start; i <= end; i++)
+    {
+        swap(&str[start], &str[i]);
+        permute(str, start + 1, end);
+        swap(&str[start], &str[i]); // deshacer el cambio (backtrack)
+    }
+}
+int main(int ac, char **av)
+{
+    if (ac != 2)
+        return 1;
+
+    char *str = av[1];
+    int len = strlen(str);
+
+    // Ordenar el string antes de empezar para que las salidas estén en orden alfabético
+    for (int i = 0; i < len - 1; i++)
+        for (int j = i + 1; j < len; j++)
+            if (str[i] > str[j])
+            {
+                char tmp = str[i];
+                str[i] = str[j];
+                str[j] = tmp;
+            }
+
+    permute(str, 0, len - 1);
+    return 0;
+}
+=========================================================================================================================
+=================================================POWERSET================================================================
+===================================== Posible solucion usando backtraking ===============================================
+#include <stdio.h>
+#include <stdlib.h>
+
+void print_subset(int *subset, int size)
+{
+    if (size == 0)
+        return;
+    for (int i = 0; i < size; i++)
+    {
+        printf("%d", subset[i]);
+        if (i < size - 1)
+            printf(" ");
+    }
+    printf("\n");
+}
+
+void solve(int *arr, int size, int index, int target,
+           int current_sum, int *subset, int subset_size)
+{
+    // Caso base: llegamos al final
+    if (index == size)
+    {
+        if (current_sum == target)
+            print_subset(subset, subset_size);
+        return;
+    }
+
+    // 1️⃣ Incluir arr[index]
+    subset[subset_size] = arr[index];
+    solve(arr, size, index + 1, target,
+          current_sum + arr[index],
+          subset, subset_size + 1);
+
+    // 2️⃣ No incluir arr[index]
+    solve(arr, size, index + 1, target,
+          current_sum, subset, subset_size);
+}
+
+int main(int ac, char **av)
+{
+    if (ac < 3)
+        return 1;
+
+    int target = atoi(av[1]);
+    int size = ac - 2;
+    int *arr = malloc(sizeof(int) * size);
+    if (!arr)
+        return 1;
+
+    for (int i = 0; i < size; i++)
+        arr[i] = atoi(av[i + 2]);
+
+    int *subset = malloc(sizeof(int) * size);
+    if (!subset)
+    {
+        free(arr);
+        return 1;
+    }
+
+    solve(arr, size, 0, target, 0, subset, 0);
+
+    free(arr);
+    free(subset);
+    return 0;
+}
