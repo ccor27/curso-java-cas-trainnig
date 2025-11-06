@@ -12,5 +12,6 @@ public class Main {
 		for (int i = 0; i < arreglo.length; i++) {
 			System.out.print(arreglo[i]+" ");
 		}
+		
 	}
 }
