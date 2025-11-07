@@ -67,7 +67,7 @@ public class Utilidades {
 		String dato = scan.nextLine();
 		return dato;
 	}
-	public TazaCafe generarTaza() {
+	public static TazaCafe generarTaza() {
 		String[] tiposCafe = {"Espresso","Cappuccino","Latte","Americano","Macchiato"};
 		Random r = new Random();
 		return new TazaCafe(tiposCafe[r.nextInt(tiposCafe.length)],r.nextInt(100));
