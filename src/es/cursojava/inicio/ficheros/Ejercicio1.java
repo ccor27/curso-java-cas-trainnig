@@ -7,6 +7,7 @@ public class Ejercicio1 {
 
 	public static void main(String[] args) {
 		
+		//TODO: use logger and investigate if the constant are correctly
 		final  String DIR_BASE = "C:\\Users\\Tardes\\Ficheros";
 		 final  String DIR_IMAGES = "\\Images";
 		 final  String DIR_DOCUMENTS = "\\Documents";
