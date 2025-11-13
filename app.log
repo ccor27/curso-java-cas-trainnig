@@ -4,3 +4,5 @@
 17:15:57.636 [main] ERROR HolaMundo - test curso error
 17:15:57.638 [main] WARN  HolaMundo - test curso warn
 17:15:57.638 [main] INFO  HolaMundo - test curso info
+19:11:51 [main] INFO  es.cursojava.inicio.ficheros.ejercicios.GuardarEnArchivo - Data fetched successfully
+19:11:51 [main] INFO  es.cursojava.inicio.ficheros.ejercicios.GuardarEnArchivo - DB connection closed successfully

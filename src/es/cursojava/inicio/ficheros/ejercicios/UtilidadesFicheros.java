@@ -1,6 +1,8 @@
-package es.cursojava.inicio.ficheros;
+package es.cursojava.inicio.ficheros.ejercicios;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -8,6 +10,7 @@ import es.cursojava.poo.exception.ejercicios.ejercicio2.pojos.TazaCafe;
 
 public class UtilidadesFicheros {
 
+	private static final String DEFAULT_FOLDER = "recursos\\"; 
 	public static String calculaEdad(int ano) {
 		return ("Tienes una edad de: " + (2025 - ano) + " año");
 	}
@@ -99,5 +102,24 @@ public class UtilidadesFicheros {
 			file.renameTo(fileModifed);
 			i++;
 		}
+	}
+	
+	
+	public static void crearArchivo2(String nombre) {
+//		File folder = new File(DEFAULT_FOLDER+nombre);
+//		
+//		if(folder.)
+//		
+//		try (PrintWriter buffer = new PrintWriter(archivo)) {
+//			// try (PrintWriter buffer = new PrintWriter(new FileWriter(archivo))){
+//
+//			buffer.println("Hola que tal amigos!");
+//			buffer.println("Todo bien? yo acá escribiendo un archivo...");
+//			buffer.printf("Hasta luego %s! %s", "JoseLuis", "Cadena");
+//			// buffer.close();
+//			System.out.println("El archivo se ha creado con éxito!");
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 	}
 }

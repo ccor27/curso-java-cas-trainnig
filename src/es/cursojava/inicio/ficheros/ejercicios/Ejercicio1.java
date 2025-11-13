@@ -1,4 +1,4 @@
-package es.cursojava.inicio.ficheros;
+package es.cursojava.inicio.ficheros.ejercicios;
 
 import java.io.File;
 import java.io.IOException;

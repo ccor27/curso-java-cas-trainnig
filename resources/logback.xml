@@ -12,7 +12,7 @@
     <file>app.log</file><!-- archivo en donde se almacenaran los logs -->
     <append>true</append>
     <encoder>
-      <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger - %msg%n</pattern>
+      <pattern>%d{HH:mm:ss} [%thread] %-5level %logger - %msg%n</pattern>
     </encoder>
   </appender>
 
