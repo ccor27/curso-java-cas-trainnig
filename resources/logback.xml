@@ -16,6 +16,14 @@
     </encoder>
   </appender>
 
+<!-- Sólo errores de Hibernate -->
+	<logger name="org.hibernate" level="ERROR" additivity="false">
+		<appender-ref ref="STDOUT" />
+	</logger>
+	
+	<logger name="org.jboss" level="ERROR" additivity="false">
+		<appender-ref ref="STDOUT" />
+	</logger>
   <!-- Nivel por defecto -->
   <root level="debug"> <!-- En mi caso lo dejare en debug, principalmente estaba en info -->
     <appender-ref ref="STDOUT"/>
