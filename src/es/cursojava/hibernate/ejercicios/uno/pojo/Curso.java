@@ -1,4 +1,4 @@
-package es.cursojava.hibernate.ejercicios.uno;
+package es.cursojava.hibernate.ejercicios.uno.pojo;
 
 import java.time.LocalDate;
 
