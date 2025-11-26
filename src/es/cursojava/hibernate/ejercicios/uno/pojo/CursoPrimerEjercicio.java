@@ -16,13 +16,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity(name = "TB_CURSO")
+@Entity(name = "TB_CURSO_PRIMER_EJERCICIO")
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor //si la elimino me da error el builder
 @Getter
 @Setter
-public class Curso {
+public class CursoPrimerEjercicio {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

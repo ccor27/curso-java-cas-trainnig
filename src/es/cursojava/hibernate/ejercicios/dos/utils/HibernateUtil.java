@@ -54,8 +54,10 @@ public class HibernateUtil {
 			LocalDate fechaInicio = tokens.length > 8 ? parseDate(tokens[8], LocalDate.now()) : LocalDate.now();
 			LocalDate fechaFin = tokens.length > 9 ? parseDate(tokens[9], LocalDate.now().plusDays(30))
 					: LocalDate.now().plusDays(30);
+			cursos.add(new Curso(null, parseCodigo(codigoStr), titulo, descripcion, duracionHoras, disponible, nivel, categoria, precio, fechaInicio, fechaFin));
 
 		}
+		System.out.println("Despues de leer archivos");
 		return cursos;
 	}
 
@@ -64,6 +66,7 @@ public class HibernateUtil {
 		try {
 			return Integer.parseInt(str.trim());
 		} catch (NumberFormatException e) {
+			System.out.println("Entro en el catch de parseInt");
 			return defaultValue;
 		}
 	}

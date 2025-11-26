@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 
-import es.cursojava.hibernate.ejercicios.uno.pojo.Curso;
+import es.cursojava.hibernate.ejercicios.uno.pojo.CursoPrimerEjercicio;
 import es.cursojava.hibernate.utils.Hibernateutil;
 
 public class CursoDAO {
@@ -15,7 +15,7 @@ public class CursoDAO {
 	public CursoDAO() {
 		session = Hibernateutil.getSessionFactory();
 	}
-	public void guardarCurso(Curso curso) {
+	public void guardarCurso(CursoPrimerEjercicio curso) {
 		session.persist(curso);
 	}
 	public void eliminarCurso() {
@@ -27,7 +27,7 @@ public class CursoDAO {
 	public void obtenerCurso() {
 		
 	}
-	public List<Curso> obtenerTodosLosCursos(){
+	public List<CursoPrimerEjercicio> obtenerTodosLosCursos(){
 		return null;
 	}
 }
