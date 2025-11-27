@@ -5,7 +5,7 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import es.cursojava.hibernate.ejercicios.dos.pojo.Curso;
+import es.cursojava.hibernate.ejercicios.dos.pojo.CursoDos;
 import es.cursojava.hibernate.ejercicios.dos.utils.HibernateUtil;
 
 public class CursoDAO {
@@ -18,18 +18,18 @@ public class CursoDAO {
 	transaction = session.beginTransaction();
 	}
 	
-	public void guardarCursos(List<Curso> cursos) {
-		for (Curso curso : cursos) {
+	public void guardarCursos(List<CursoDos> cursos) {
+		for (CursoDos curso : cursos) {
 			session.persist(curso);
 		}
 	}
 	
-	public Curso obtenerCursoPorId(Long id) {
-		return session.get(Curso.class, id);
+	public CursoDos obtenerCursoPorId(Long id) {
+		return session.get(CursoDos.class, id);
 	}
 	
-	public List<Curso> obtenerCursos(){
-		return session.createQuery("FROM Curso",Curso.class).list();
+	public List<CursoDos> obtenerCursos(){
+		return session.createQuery("FROM Curso",CursoDos.class).list();
 	}
 	
 	public void commitTransaction() {

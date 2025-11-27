@@ -14,8 +14,10 @@
         <property name="hibernate.dialect">org.hibernate.dialect.OracleDialect</property>
 
         <!-- Mostrar SQL por consola -->
-        <property name="hibernate.show_sql">true</property>
-        <property name="hibernate.format_sql">true</property>
+     <!--    <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.format_sql">true</property> -->
+        <property name="hibernate.show_sql">false</property>
+        <property name="hibernate.format_sql">false</property>
 
         <!-- Crear y borrar la base de datos en cada ejecución -->
         <!-- <property name="hibernate.hbm2ddl.auto">create-drop</property> -->
@@ -31,7 +33,8 @@
         <!-- Entidad mapeada -->
         <mapping class="es.cursojava.hibernate.Company"/>
         <mapping class="es.cursojava.hibernate.ejercicios.uno.pojo.CursoPrimerEjercicio"/>
-        <mapping class="es.cursojava.hibernate.ejercicios.dos.pojo.Curso"/>
+        <mapping class="es.cursojava.hibernate.ejercicios.dos.pojo.CursoDos"/>
+        <mapping class="es.cursojava.hibernate.ejercicios.tres.pojos.Curso"/>
         
         
     </session-factory>

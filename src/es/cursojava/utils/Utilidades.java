@@ -2,6 +2,9 @@ package es.cursojava.utils;
 
 import java.util.Scanner;
 
+import es.cursojava.hibernate.ejercicios.tres.pojos.Codigo;
+import es.cursojava.hibernate.ejercicios.tres.service.CursoDAOImpl;
+
 public class Utilidades {
 
 	public static String calculaEdad(int ano) {
@@ -46,4 +49,14 @@ public class Utilidades {
 		String dato = scan.nextLine();
 		return dato;
 	}
+
+	public static String pideDatoFecha(String texto, String formato) {
+		System.out.println(texto);
+		System.out.println(formato);
+		Scanner scan = new Scanner(System.in);
+		String dato = scan.nextLine();
+		return dato;
+
+	}
+
 }

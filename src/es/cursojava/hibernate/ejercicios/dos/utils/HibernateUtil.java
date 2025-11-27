@@ -14,7 +14,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import es.cursojava.hibernate.ejercicios.dos.pojo.Codigo;
-import es.cursojava.hibernate.ejercicios.dos.pojo.Curso;
+import es.cursojava.hibernate.ejercicios.dos.pojo.CursoDos;
 
 public class HibernateUtil {
 
@@ -35,8 +35,8 @@ public class HibernateUtil {
 		return session;
 	}
 
-	public static List<Curso> leerArchivo(String nombre) throws IOException {
-		List<Curso> cursos = new ArrayList<Curso>();
+	public static List<CursoDos> leerArchivo(String nombre) throws IOException {
+		List<CursoDos> cursos = new ArrayList<CursoDos>();
 		Path path = Paths.get(nombre);
 		List<String> data = Files.readAllLines(path);
 		for (String line : data) {
@@ -54,7 +54,7 @@ public class HibernateUtil {
 			LocalDate fechaInicio = tokens.length > 8 ? parseDate(tokens[8], LocalDate.now()) : LocalDate.now();
 			LocalDate fechaFin = tokens.length > 9 ? parseDate(tokens[9], LocalDate.now().plusDays(30))
 					: LocalDate.now().plusDays(30);
-			cursos.add(new Curso(null, parseCodigo(codigoStr), titulo, descripcion, duracionHoras, disponible, nivel, categoria, precio, fechaInicio, fechaFin));
+			cursos.add(new CursoDos(null, parseCodigo(codigoStr), titulo, descripcion, duracionHoras, disponible, nivel, categoria, precio, fechaInicio, fechaFin));
 
 		}
 		System.out.println("Despues de leer archivos");
