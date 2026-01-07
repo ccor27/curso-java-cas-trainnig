@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -41,7 +42,7 @@ public class HibernateUtils {
 		}
 		return session;
 	}
-	
+
 	public static List<Curso> leerArchivo(String nombre) throws IOException {
 		List<Curso> cursos = new ArrayList<Curso>();
 		Path path = Paths.get(nombre);
@@ -111,7 +112,7 @@ public class HibernateUtils {
 			return Codigo.SIN_DEFINIR; // valor por defecto
 		}
 	}
-	
+
 	public static void pintaMenu(String[] options) {
 		pintaMenu(options, "Introduce una opcion:");
 	}
@@ -150,7 +151,7 @@ public class HibernateUtils {
 		String dato = scan.nextLine();
 		return dato;
 	}
-	
+
 	public static void menuHibernateCursos(String[] opciones, CursoDAOImpl daoImpl) {
 		boolean flag = true;
 		System.out.println("==============================================");
@@ -161,21 +162,24 @@ public class HibernateUtils {
 			int opcion = pideDatoNumerico("");
 			switch (opcion) {
 			case 1: {
-				//Información de un Curso por su Código
+				// Información de un Curso por su Código
 				verInformacionCursoPorSuCodigo(daoImpl);
 				break;
 			}
 			case 2: {
-				//Información de cursos por categoría y fecha inicio > 1/02/2025
+				// Información de cursos por categoría y fecha inicio > 1/02/2025
+				verInformacionCursoPorCategoriaYFecha(daoImpl);
 				break;
 			}
 			case 3: {
-				//Información de todos los cursos por nivel, por horas > y fecha inicio
+				// Información de todos los cursos por nivel, por horas > y fecha inicio
+				verInformacionCursosPorNivelHorasFechaInicio(daoImpl);
 				break;
 			}
 			case 4: {
-				//salir
+				// salir
 				flag = false;
+				System.out.println("Gracias por usar nuesta aplicacion!.");
 				break;
 			}
 			default:
@@ -183,20 +187,61 @@ public class HibernateUtils {
 			}
 		}
 	}
-	
+
+	//TODO: fix this method, I get an error setting a date
+	private static void verInformacionCursosPorNivelHorasFechaInicio(CursoDAOImpl daoImpl) {
+		boolean flag = true;
+		String fechaDeInicioTmp = null;
+		LocalDate fechaInicio = null;
+		int horas = 0;
+		String nivel = null;
+		String fechaInicioStr = pideDatoCadena("Ingresa la fecha de inicio (AAAA-MM-DD) o deja vacio para omitir");
+		if (!fechaInicioStr.isBlank() || isDateFormatCorrect(fechaInicioStr)) {
+			fechaDeInicioTmp = fechaInicioStr;
+		}
+
+		int horasTmp = pideDatoNumerico("Ingrese el numero de horas o ingresa 0 para omitir");
+		if (horasTmp > 0) {
+			horas = horasTmp;
+		}
+		String nivelStr = pideDatoCadena("Ingrese el nivel del curso o deja vacio para omitir");
+		if (!nivelStr.isBlank()) {
+			nivel = nivelStr;
+		}
+		if(fechaDeInicioTmp != null) {
+			fechaInicio = LocalDate.parse(fechaDeInicioTmp);
+		}
+		List<Curso> cursos = daoImpl.obtenerCursosPorNivelYHorasYFechaInicio(nivel, horas,fechaInicio);
+		for (Curso curso : cursos) {
+			System.out.println(curso);
+		}
+	}
+
+	private static boolean isDateFormatCorrect(String fecha) {
+		return fecha.matches("^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])$");
+	}
+
 	private static void verInformacionCursoPorCategoriaYFecha(CursoDAOImpl daoImpl) {
 		boolean flag = true;
 		String categoria = "";
 		do {
 			categoria = pideDatoCadena("Ingresa la categoria a buscar.");
-			if(categoria.isEmpty() || categoria.isBlank()) {
+			if (categoria.isEmpty() || categoria.isBlank()) {
 				System.out.println("Ingrese una categoria valida");
-			}else {
+			} else {
 				flag = false;
 			}
-		}while(flag);
-		//TODO: finish this
+		} while (flag);
+		List<Curso> cursos = daoImpl.obtenerCursosPorCategoria(categoria);
+		if (cursos.isEmpty()) {
+			System.out.println("No hay cursos con esa categoria.");
+		} else {
+			for (Curso curso : cursos) {
+				System.out.println(curso);
+			}
+		}
 	}
+
 	private static void verInformacionCursoPorSuCodigo(CursoDAOImpl daoImpl) {
 		boolean flag = true;
 		String codigoStr = "";
@@ -204,16 +249,14 @@ public class HibernateUtils {
 		do {
 			codigoStr = pideDatoCadena("Ingresa el codigo:");
 			codigo = parseCodigo(codigoStr);
-			if(codigo != Codigo.SIN_DEFINIR) {
+			if (codigo != Codigo.SIN_DEFINIR) {
 				flag = false;
-			}else {
+			} else {
 				System.out.println("Ese codigo no existe, por favor ingresa uno valido!");
 			}
-		}while(flag);
+		} while (flag);
 		Curso curso = daoImpl.obtenerCursoPorId(codigo);
 		daoImpl.commitTransaction();
 		System.out.println(curso);
 	}
-	
-	
 }

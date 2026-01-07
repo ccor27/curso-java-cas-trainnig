@@ -1,19 +1,24 @@
-package es.cursojava.hibernate.ejercicios.tres.pojos;
+package es.cursojava.hibernate.ejercicios.onetone.model;
 
 import java.time.LocalDate;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
+@Table(name = "TB_CURSO")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -34,6 +39,9 @@ public class Curso {
     private double precio;                
     private LocalDate fechaInicio;        
     private LocalDate fechaFin;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "aula_id")
+    private Aula aula;
 	@Override
 	public String toString() {
 		return "\nCurso\n    id: "+id+"\n    codigo: "+codigo+"\n    titulo: "+titulo+"\n    descripcion: "+descripcion+"\n    duracion horas: "+duracionHoras
