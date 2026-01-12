@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>es.cursojava</groupId>
 	<artifactId>PrimerProyecto</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
 		<resources>
@@ -22,13 +22,22 @@
 			</resource>
 		</resources>
 		<plugins>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.13.0</version>
-				<configuration>
-					<release>21</release>
-				</configuration>
-			</plugin>
+		<plugin>
+    		<groupId>org.apache.maven.plugins</groupId>
+    		<artifactId>maven-compiler-plugin</artifactId>
+    		<version>3.13.0</version>
+		    <configuration>
+		        <release>21</release>
+		        <annotationProcessorPaths>
+            		<path>
+                	<groupId>org.projectlombok</groupId>
+                	<artifactId>lombok</artifactId>
+                	<version>1.18.42</version>
+            </path>
+        </annotationProcessorPaths>
+    </configuration>
+</plugin>
+
 		</plugins>
 	</build>
 	<dependencies>
@@ -50,6 +59,7 @@
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<version>1.18.42</version>
+			<scope>provided</scope>
 		</dependency>
 				<!-- Hibernate -->
 		<!-- Hibernate Core -->

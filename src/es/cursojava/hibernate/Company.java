@@ -33,6 +33,4 @@ public class Company {
 	@Column(name = "ACTIVITY")
 	private String activityType;
 	private Date dateOfEstablishment;
-	
-	
 }

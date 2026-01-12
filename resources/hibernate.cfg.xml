@@ -37,11 +37,11 @@
          <mapping class="es.cursojava.hibernate.ejercicios.tres.pojos.Curso"/>
         <mapping class="es.cursojava.hibernate.ejercicios.gestionsalarios.pojo.Employee"/>
          <mapping class="es.cursojava.hibernate.ejercicios.onetone.model.Curso"/>
-        <mapping class="es.cursojava.hibernate.ejercicios.onetone.model.Aula"/> -->
+        <mapping class="es.cursojava.hibernate.ejercicios.onetone.model.Aula"/>
         <mapping class="es.cursojava.hibernate.ejercicios.aulas.model.Alumno"/>
         <mapping class="es.cursojava.hibernate.ejercicios.aulas.model.Aula"/>
-        <mapping class="es.cursojava.hibernate.ejercicios.aulas.model.Curso"/>
-        
+        <mapping class="es.cursojava.hibernate.ejercicios.aulas.model.Curso"/> -->
+        <mapping class="es.cursojava.hibernate.ejercicios.curso.model.Alumno"/>
         
     </session-factory>
 </hibernate-configuration>
