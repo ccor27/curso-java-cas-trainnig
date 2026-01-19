@@ -22,7 +22,7 @@ public class AlumnoDAO implements IAlumnoDAO{
 			return alumno;
 		}catch (Exception e) {
 			if (tx != null) tx.rollback();
-			throw new CustomException("Error: "+e.getLocalizedMessage());
+			throw new CustomException("Error: "+e.getLocalizedMessage(),null);
 		}
 	}
 
@@ -40,7 +40,7 @@ public class AlumnoDAO implements IAlumnoDAO{
 		        return alumnos;
 		}catch (Exception e) {
 			if (tx != null) tx.rollback();
-			throw new CustomException("Error: "+e.getLocalizedMessage());
+			throw new CustomException("Error: "+e.getLocalizedMessage(),null);
 		}
 	}
 
