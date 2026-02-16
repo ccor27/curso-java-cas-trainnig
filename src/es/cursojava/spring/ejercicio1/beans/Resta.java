@@ -10,7 +10,7 @@ public class Resta implements Operacion {
 	@Override
 	public int calcular(int a, int b) {
 		// TODO Auto-generated method stub
-		return 0;
+		return a-b;
 	}
 
 	@Override
