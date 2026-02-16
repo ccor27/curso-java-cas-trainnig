@@ -1,0 +1,124 @@
+- Cursor -> es un conjunto de resultados que se almacenan en memoria, es decir, al hacer un select que nos retorna muchas líneas, esto se almacenaría en el cursor. Yo lo veo como una lista de registros
+
+/**
+*Ejemplo para obtener el el id y el nombre de la region
+*/
+DECLARE
+	v_region_id regions.region_id%type;
+	v_region_name regions.region_name%type;
+	Cursor test_cursor is select region_id, region_name from regions;
+BEGIN
+	open test_cursor;
+	loop
+		fetch test_cursor into v_region_id, v_region_name;
+		exit when test_cursor%NOTFOUND;
+		dbms_output.put_line('La region '|| v_region_id||' es '||' "'||v_region_name||'"');
+	end loop;
+	close test_cursor;
+END;
+/
+
+- para escapar una comilla simple, se usa otra comilla simple ''''
+==================================================================================================
+/**
+* El mismo ejercicio anterior, solo que esta vez vamos a mostrar los países de cada region
+*/
+DECLARE
+	v_region_id regions.region_id%type;
+	v_region_name regions.region_name%type;
+	v_country_name countries.country_name%type;
+	Cursor cursor_regiones is 
+			select region_id, region_name 
+			from regions;
+	Cursor cursor_paises(p_region_id regions.region_id%TYPE) is
+			select country_name
+			from countries
+			where region_id = p_region_id;
+BEGIN
+	open cursor_regiones;
+	loop
+		fetch cursor_regiones into v_region_id, v_region_name;
+		exit when cursor_regiones%NOTFOUND;
+		dbms_output.put_line('La region '|| v_region_id||' es '||' '''||v_region_name||'''');
+		open cursor_paises(v_region_id);
+			loop
+				fetch cursor_paises into v_country_name;
+				exit when cursor_paises%NOTFOUND;
+				dbms_output.put_line(lpad(' ',5)||'-'||v_country_name);
+			end loop;
+		close cursor_paises;
+	end loop;
+	close cursor_regiones;
+END;
+/
+==================================================================================================
+/**
+* mostrar las regiones, cada país de cada región, cada ciudad de cada país su departamento
+* costo total de empleados por departamento
+*/
+
+//aquí mi humilde intento, con loops anidados y sin validar nulls
+DECLARE
+	v_region_id regions.region_id%type;
+	v_region_name regions.region_name%type;
+	v_country_name countries.country_name%type;
+	v_country_id countries.country_id%type;
+	v_location_id locations.location_id%type;
+	v_city_name locations.city%type;
+	v_department_id departments.department_id%type;
+	v_department_name departments.department_name%type;
+	v_total_valor_por_departamento employees.salary%type;
+	Cursor cursor_regiones is 
+			select region_id, region_name 
+			from regions;
+	Cursor cursor_paises(p_region_id regions.region_id%TYPE) is
+			select country_id, country_name
+			from countries
+			where region_id = p_region_id;
+	Cursor cursor_ciudades(p_country_id countries.country_id%type) is
+			select location_id, city
+			from locations
+			where country_id = p_country_id;
+	Cursor cursor_departementos(p_location_id locations.location_id%type) is
+			select department_id, department_name
+			from departments
+			where location_id = p_location_id;
+BEGIN
+	open cursor_regiones;
+	loop
+		fetch cursor_regiones into v_region_id, v_region_name;
+		exit when cursor_regiones%NOTFOUND;
+		dbms_output.put_line('La region '|| v_region_id||' es '||' '''||v_region_name||'''');
+		open cursor_paises(v_region_id);
+			loop
+				fetch cursor_paises into v_country_id, v_country_name;
+				exit when cursor_paises%NOTFOUND;
+				dbms_output.put_line(lpad('.',3)||'-'||v_country_name);
+				open cursor_ciudades(v_country_id);
+					loop
+						fetch cursor_ciudades into v_location_id, v_city_name;
+						exit when cursor_ciudades%NOTFOUND;
+						dbms_output.put_line(lpad('.',6)||'-'||v_city_name);
+						open cursor_departementos(v_location_id);
+							loop
+								fetch cursor_departementos into v_department_id, v_department_name;
+								dbms_output.put_line(lpad('.',9)||'-'||v_department_name);
+								select sum(salary) into v_total_valor_por_departamento from employees where department_id = v_department_id;
+								dbms_output.put_line(lpad('.',9)||'- lo que se gasta en empleados: '||v_total_valor_por_departamento);
+								exit when cursor_departementos%NOTFOUND;
+							end loop;
+						close cursor_departementos;
+					end loop;
+				close cursor_ciudades;
+			end loop;
+		close cursor_paises;
+	end loop;
+	close cursor_regiones;
+END;
+/
+
+/**
+*Link de recursos
+*/
+https://sarreplec.caib.es/pluginfile.php/9881/mod_resource/content/2/index.html
+
